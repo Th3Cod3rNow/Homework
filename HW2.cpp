@@ -9,9 +9,9 @@ void N1()
     double h, R, r, l;
     cout << "Enter h, R, r to find V and S of your cone: ";
     cin >> h >> R >> r;
-    l = pow(pow(R - r, 2) + pow(h, 2), 1 / 2);
+    l = pow(pow(R - r, 2.) + pow(h, 2.), 1. / 2.);
 
-    ((r == 0. && R > 0.) || (r > 0. && R == 0.) || (r > 0. && R > 0.)) && (r != R) ? cout << "V = " << 1. / 3. * M_PI * h * (pow(R, 2.) + R * r + pow(r, 2.)) << "\n" << "S = " << M_PI * (pow(R, 2.) + (R + r) * l + pow(r, 2.)) << "\n" : cout << "ERROR!\n";
+    ((r == 0. && R > 0.) || (r > 0. && R == 0.) || (r > 0. && R > 0.)) && (r != R) && (h >= 0) ? cout << "V = " << 1. / 3. * M_PI * h * (pow(R, 2.) + R * r + pow(r, 2.)) << "\n" << "S = " << M_PI * (pow(R, 2.) + (R + r) * l + pow(r, 2.)) << "\n" : cout << "ERROR!\n";
 }
 
 void N2()
@@ -20,7 +20,7 @@ void N2()
     cout << "To find w enter x and a: ";
     cin >> x >> a;
 
-    a > pow(x, 2.) ? (abs(x) < 1. ? cout << "w = " << a * log(abs(x)) << "\n" : cout << "w = " << pow(a - pow(x, 2.), 1. / 2.) << "\n") : cout << "ERROR!\n";
+    a >= pow(x, 2.) && (x != 0) ? (abs(x) < 1. ? cout << "w = " << a * log(abs(x)) << "\n" : cout << "w = " << pow(a - pow(x, 2.), 1. / 2.) << "\n") : cout << "ERROR!\n";
 }
 
 void N3()
@@ -38,7 +38,7 @@ void N4()
     cout << "Enter any number: ";
     cin >> n;
 
-    cout << n << " " << n + 1 << " " << n + 2 << " " << n + 3 << " " << n + 4 << " " << n + 5 << " " << n + 6 << " " << n + 7 << " " << n + 8 << " " << n + 9 << " " << "\n";
+    n > 0 ? (cout << n << " " << n + 1 << " " << n + 2 << " " << n + 3 << " " << n + 4 << " " << n + 5 << " " << n + 6 << " " << n + 7 << " " << n + 8 << " " << n + 9 << " " << "\n") : (cout << "1 2 3 4 5 6 7 8 9 10\n");
 }
 
 void N5()
@@ -59,29 +59,29 @@ int main()
 
     switch (NUM)
     {
-        case 1:
-            N1();
-            doAgain();
-            break;
-        case 2:
-            N2();
-            doAgain();
-            break;
-        case 3:
-            N3();
-            doAgain();
-            break;
-        case 4:
-            N4();
-            doAgain();
-            break;
-        case 5:
-            N5();
-            doAgain();
-            break;
-        default:
-            cout << "This number is unavailable!";
-            break;
+    case 1:
+        N1();
+        doAgain();
+        break;
+    case 2:
+        N2();
+        doAgain();
+        break;
+    case 3:
+        N3();
+        doAgain();
+        break;
+    case 4:
+        N4();
+        doAgain();
+        break;
+    case 5:
+        N5();
+        doAgain();
+        break;
+    default:
+        cout << "This number is unavailable!";
+        break;
     }
 
     return 0;
