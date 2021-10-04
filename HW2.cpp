@@ -11,7 +11,7 @@ void N1()
     cin >> h >> R >> r;
     l = pow(pow(R - r, 2) + pow(h, 2), 1 / 2);
 
-    (r == 0. && R > 0.) || (r > 0. && R == 0.) || (r > 0. && R > 0.) ? cout << "V = " << 1. / 3. * M_PI * h * (pow(R, 2.) + R * r + pow(r, 2.)) << "\n" << "S = " << M_PI * (pow(R, 2.) + (R + r) * l + pow(r, 2.)) << "\n" : cout << "ERROR!\n";
+    ((r == 0. && R > 0.) || (r > 0. && R == 0.) || (r > 0. && R > 0.)) && (r != R) ? cout << "V = " << 1. / 3. * M_PI * h * (pow(R, 2.) + R * r + pow(r, 2.)) << "\n" << "S = " << M_PI * (pow(R, 2.) + (R + r) * l + pow(r, 2.)) << "\n" : cout << "ERROR!\n";
 }
 
 void N2()
