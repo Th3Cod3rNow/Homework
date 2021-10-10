@@ -21,7 +21,7 @@ void N2()
     cout << "Enter m, S, n to find your percent: ";
     cin >> m >> S >> n;
 
-    if ((S > 0.) && (n > 0.) && (m > 0.))
+    if ((S > 0.) && (n > 0.) && (m > 0.) && (m * n >= S))
     {
         for (double p = 0.; p > -1.; p += 0.1)
         {
