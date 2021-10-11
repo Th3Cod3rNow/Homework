@@ -15,28 +15,43 @@ void N1()
     (S > 0.) && (n > 0.) && (p > 0.) ? cout << "Your mounth pay: " << (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.)) << "\n" : cout << "Something was wrong! Please, check your entered values.\n";
 }
 
+void ssuda(double endP, double m, double S, double n, double k)
+{
+    for (double p = endP; p > -1.; p += k)
+    {
+        if ((m < (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) && (to_string(p).size() < 7))
+        {
+            endP = p - k;
+            k /= 10;
+            ssuda(endP, m, S, n, k);
+            break;
+        }
+        else if ((m == (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) || (to_string(p).size() == 7))
+        {
+            cout << "Your percent is " << p << " !\n";
+            break;
+        }
+    }
+}
+
 void N2()
 {
-    double m, S, n;
+    double m, S, n, endP;
     cout << "Enter m, S, n to find your percent: ";
     cin >> m >> S >> n;
+    double k = 1.;
+    endP = 0.;
 
-    if ((S > 0.) && (n > 0.) && (m > 0.) && (m * n >= S))
+    if ((S > 0.) && (n > 0.) && (m > 0.) && (m * n * 12 >= S))
     {
-        for (double p = 0.; p > -1.; p += 0.1)
-        {
-            if (m <= (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.)))
-            {
-                cout << "Your percent is " << p << " !\n";
-                break;
-            }
-        }
+        ssuda(endP, m, S, n, k);
     }
     else
     {
         cout << "Something was wrong! Please, check your entered values.\n";
     }
 }
+
 
 void N3()
 {
