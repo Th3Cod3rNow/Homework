@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <iomanip>
 
 using namespace std;
 
@@ -12,21 +13,22 @@ void N1()
     cout << "Enter S, n, p to find your mounth pay: ";
     cin >> S >> n >> p;
 
-    (S > 0.) && (n > 0.) && (p > 0.) ? cout << "Your mounth pay: " << (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.)) << "\n" : cout << "Something was wrong! Please, check your entered values.\n";
+    (S > 0.) && (n > 0.) && (p > 0.) ? cout << "Your mounth pay: " << setprecision(100) << (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.)) << "\n" : cout << "Something was wrong! Please, check your entered values.\n";
 }
 
-void ssuda(double endP, double m, double S, double n, double k)
+void ssuda(double endP, double m, double S, double n, double k, int flag)
 {
     for (double p = endP; p > -1.; p += k)
     {
-        if ((m < (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) && (to_string(p).size() < 7))
+        if ((m < (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) && (flag < 100))
         {
+            flag++;
             endP = p - k;
             k /= 10;
-            ssuda(endP, m, S, n, k);
+            ssuda(endP, m, S, n, k, flag);
             break;
         }
-        else if ((m == (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) || (to_string(p).size() == 7))
+        else if ((m == (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) || (flag == 100))
         {
             cout << "Your percent is " << p << " !\n";
             break;
@@ -41,10 +43,15 @@ void N2()
     cin >> m >> S >> n;
     double k = 1.;
     endP = 0.;
+    int flag = 0;
 
-    if ((S > 0.) && (n > 0.) && (m > 0.) && (m * n * 12 >= S))
+    if ((S > 0.) && (n > 0.) && (m > 0.) && (m * n * 12 > S))
     {
-        ssuda(endP, m, S, n, k);
+        ssuda(endP, m, S, n, k, flag);
+    }
+    else if (m * n * 12 == S)
+    {
+        cout << "Your percent is 0!\n";
     }
     else
     {
@@ -73,7 +80,7 @@ void N3()
         {
             string userText;
             cout << "Enter your text here: ";
-            cin >> userText;
+            getline(cin >> ws, userText);
 
             userF << userText;
         }
@@ -107,14 +114,19 @@ void N4()
     userF.close();
 }
 
+bool comp(char c1, char c2)
+{
+    return tolower(c1) < tolower(c2);
+}
+
 void N5()
 {
     string userText;
     cout << "Enter any text here without numbers: ";
     cin >> userText;
-    sort(userText.begin(), userText.end());
+    sort(userText.begin(), userText.end(), comp);
 
-    userText.size() == 30 || isdigit(userText[0]) ? cout << userText << "\n" : cout << "ERROR!\n";
+    userText.size() == 30 && !isdigit(userText[0]) ? cout << userText << "\n" : cout << "ERROR!\n";
 }
 
 void doAgain();
