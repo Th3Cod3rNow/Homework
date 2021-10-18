@@ -20,7 +20,7 @@ void ssuda(double endP, double m, double S, double n, double k, int flag)
 {
     for (double p = endP; p > -1.; p += k)
     {
-        if ((m < (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) && (flag < 100))
+        if ((m < (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) && (flag < 6))
         {
             flag++;
             endP = p - k;
@@ -28,9 +28,9 @@ void ssuda(double endP, double m, double S, double n, double k, int flag)
             ssuda(endP, m, S, n, k, flag);
             break;
         }
-        else if ((m == (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) || (flag == 100))
+        else if ((m == (S * (p / 100.) * pow(1. + (p / 100.), n)) / (12. * (pow(1. + (p / 100.), n) - 1.))) || (flag == 6))
         {
-            cout << "Your percent is " << p << " !\n";
+            cout << "Your percent is " << fixed << setprecision(10) << p << "!\n";
             break;
         }
     }
@@ -59,16 +59,9 @@ void N2()
     }
 }
 
-
 void N3()
 {
-    string fileName, fileWay;
-    cout << "Enter name of file you want to create: ";
-    cin >> fileName;
-    cout << "Enter way you want to create your file: ";
-    cin >> fileWay;
-
-    ofstream userF(fileWay + fileName + ".txt");
+    ofstream userF("c:/users/mirea/desktop/1.txt");
 
     if (userF.is_open())
     {
@@ -91,32 +84,46 @@ void N3()
     }
 
     userF.close();
-}
 
+    ifstream newUserF("c:/users/mirea/desktop/1.txt");
+
+    if (newUserF.is_open())
+    {
+        string newText;
+        getline(newUserF, newText);
+        cout << newText << endl;
+    }
+    else
+    {
+        cout << "Oops... Something was wrong!\n";
+    }
+    newUserF.close();
+}
+/*
 void N4()
 {
-    string fileName, fileWay, fileText;
-    cout << "Enter name of file you want to read: ";
-    cin >> fileName;
-    cout << "Enter the way to your file: ";
-    cin >> fileWay;
+    string fileText;
 
-    ifstream userF(fileWay + fileName + ".txt");
+    ifstream userF("c:/users/mirea/desktop/1.txt");
     getline(userF, fileText);
-    for (char letter : fileText)
+    for (int NUM = 0; NUM < fileText.size(); NUM++)
     {
-        if (isdigit(letter))
+        if (isdigit(fileText[NUM]) && !isdigit(fileText[NUM + 1]))
         {
-            cout << letter << " ";
+            cout << fileText[NUM] << " ";
+        }
+        else if (isdigit(fileText[NUM]) && isdigit(fileText[NUM + 1]))
+        {
+            cout << fileText[NUM];
         }
     }
     cout << "\n";
     userF.close();
 }
 
-bool comp(char c1, char c2)
+bool comp(string s)
 {
-    return tolower(c1) < tolower(c2);
+    return 0;
 }
 
 void N5()
@@ -126,9 +133,10 @@ void N5()
     cin >> userText;
     sort(userText.begin(), userText.end(), comp);
 
-    userText.size() == 30 && !isdigit(userText[0]) ? cout << userText << "\n" : cout << "ERROR!\n";
+    userText.size() != 30 ? cout << "Size isn't 30\n" : cout;
+    isdigit(userText[0]) ? cout << "ERROR!\n" : cout << userText << "\n";
 }
-
+*/
 void doAgain();
 
 int main()
@@ -151,6 +159,7 @@ int main()
         N3();
         doAgain();
         break;
+    /*
     case 4:
         N4();
         doAgain();
@@ -159,6 +168,7 @@ int main()
         N5();
         doAgain();
         break;
+    */
     default:
         cout << "This number is unavailable!";
         break;
