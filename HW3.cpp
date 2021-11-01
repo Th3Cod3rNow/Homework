@@ -61,7 +61,13 @@ void N2()
 
 void N3()
 {
-    ofstream userF("c:/users/mirea/desktop/1.txt");
+    string fileName, fileWay;
+    cout << "Write here filename you want to create: ";
+    cin >> fileName;
+    cout << "Write here way where you want to create your file: ";
+    cin >> fileWay;
+
+    ofstream userF(fileWay + fileName + ".txt");
 
     if (userF.is_open())
     {
@@ -85,7 +91,7 @@ void N3()
 
     userF.close();
 
-    ifstream newUserF("c:/users/mirea/desktop/1.txt");
+    ifstream newUserF(fileWay + fileName + ".txt");
 
     if (newUserF.is_open())
     {
@@ -99,12 +105,16 @@ void N3()
     }
     newUserF.close();
 }
-/*
+
 void N4()
 {
-    string fileText;
+    string fileName, fileWay, fileText;
+    cout << "Write here filename you want to create: ";
+    cin >> fileName;
+    cout << "Write here way where you want to create your file: ";
+    cin >> fileWay;
 
-    ifstream userF("c:/users/mirea/desktop/1.txt");
+    ifstream userF(fileWay + fileName + ".txt");
     getline(userF, fileText);
     for (int NUM = 0; NUM < fileText.size(); NUM++)
     {
@@ -121,22 +131,47 @@ void N4()
     userF.close();
 }
 
-bool comp(string s)
+string sortingBuble(string s)
 {
-    return 0;
+    for (int i = 0; i < s.length() - 1; i++)
+    {
+        for (int j = s.length() - 1; j > i; j--)
+        {
+            if (s[j - 1] > s[j])
+            {
+                char T = s[j - 1];
+                s[j - 1] = s[j];
+                s[j] = T;
+            }
+        }
+    }
+
+    for (int i = 0; i < s.length() - 1; i++)
+    {
+        for (int j = s.length() - 1; j > i; j--)
+        {
+            if (toupper(s[j]) < toupper(s[j - 1]))
+            {
+                char T = s[j - 1];
+                s[j - 1] = s[j];
+                s[j] = T;
+            }
+        }
+    }
+
+    return s;
 }
 
 void N5()
 {
-    string userText;
+    string userText, sortedText;
     cout << "Enter any text here without numbers: ";
     cin >> userText;
-    sort(userText.begin(), userText.end(), comp);
-
-    userText.size() != 30 ? cout << "Size isn't 30\n" : cout;
-    isdigit(userText[0]) ? cout << "ERROR!\n" : cout << userText << "\n";
+    sortedText = sortingBuble(userText);
+    userText.size() != 30 ? cout << "Size isn't 30!\n" : cout;
+    isdigit(userText[0]) ? cout << "ERROR!\n" : cout << sortedText << "\n";
 }
-*/
+
 void doAgain();
 
 int main()
@@ -159,7 +194,6 @@ int main()
         N3();
         doAgain();
         break;
-    /*
     case 4:
         N4();
         doAgain();
@@ -168,7 +202,6 @@ int main()
         N5();
         doAgain();
         break;
-    */
     default:
         cout << "This number is unavailable!";
         break;
