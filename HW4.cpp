@@ -12,7 +12,6 @@ using namespace std;
 void N1()
 {
     string fileName, fileWay;
-    int spaces = 0;
     cout << "Enter name of file you want to create: ";
     cin >> fileName;
     cout << "Enter way you want to create your file: ";
