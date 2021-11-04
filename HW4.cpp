@@ -2,12 +2,30 @@
 #include <cmath>
 #include <fstream>
 #include <string>
-#include <algorithm>
-#include <iomanip>
-#include <sstream>
-#include <vector>
 
 using namespace std;
+
+string numControl()
+{
+    string NUM;
+    int flag = 1;
+    cin >> NUM;
+    for (char letter : NUM)
+    {
+        if (!isdigit(letter) && letter != '-' && letter != '.')
+        {
+            flag = 0;
+            break;
+        }
+    }
+    if (flag == 1)
+        return NUM + ' ';
+    else
+    {
+        cout << "Please, enter digit!\n";
+        numControl();
+    }
+}
 
 void N1()
 {
@@ -21,7 +39,13 @@ void N1()
 
     if (userF.is_open())
     {
-        
+        string allNums = "";
+        cout << "Enter 10 digits: ";
+        for (int i = 0; i < 10; i++)
+        {
+            allNums += numControl();
+        }
+        userF << allNums;
     }
     else
         cout << "Oops... Something was wrong!\n";
@@ -29,9 +53,26 @@ void N1()
     userF.close();
 
     ifstream newUserF(fileWay + fileName + ".txt");
+
     if (newUserF.is_open())
     {
-        
+        string strFromFile;
+        string digitForSum = "";
+        double summa = 0;
+        getline(newUserF, strFromFile);
+        for (int k = 0; k < strFromFile.size(); k++)
+        {
+            if (strFromFile[k] != ' ')
+            {
+                digitForSum += strFromFile[k];
+            }
+            else
+            {
+                summa += stod(digitForSum);
+                digitForSum = "";
+            }
+        }
+        cout << summa << endl;
     }
     else
         cout << "Oops... Something was wrong!\n";
