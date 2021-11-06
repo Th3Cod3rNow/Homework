@@ -4,6 +4,7 @@
 #include <cmath>
 #include <fstream>
 #include <string>
+#include <windows.h>
 
 using namespace std;
 
@@ -133,20 +134,490 @@ void N3()
 
 void N4()
 {
-    cout << "\x1b[44;1m    Я                   \x1b[0m" << "\x1b[41;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m  ЯЯЯЯЯ                 \x1b[0m" << "\x1b[41;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m   ЯЯЯ                  \x1b[0m" << "\x1b[47;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m  Я   Я                 \x1b[0m" << "\x1b[47;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m *  *  *  *  *  *  *  * \x1b[0m" << "\x1b[41;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m *  *  *  *  *  *  *  * \x1b[0m" << "\x1b[41;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m                        \x1b[0m" << "\x1b[47;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m                        \x1b[0m" << "\x1b[47;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m *  *  *  *  *  *  *  * \x1b[0m" << "\x1b[41;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m *  *  *  *  *  *  *  * \x1b[0m" << "\x1b[41;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m                        \x1b[0m" << "\x1b[47;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m                        \x1b[0m" << "\x1b[47;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m *  *  *  *  *  *  *  * \x1b[0m" << "\x1b[41;1m                                                                          \x1b[0m\n";
-    cout << "\x1b[44;1m *  *  *  *  *  *  *  * \x1b[0m" << "\x1b[41;1m                                                                          \x1b[0m\n";
+    HWND hwnd = GetConsoleWindow();
+    HDC hdc = GetDC(hwnd);
+
+    int changings[20] = { 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4 };
+    int x = 1;
+
+    for (int l = 0; l < 20; l++)
+    {
+        int allStars = 0;
+        for (double i = 0; i < M_PI * 2.5; i += 0.02)
+        {
+            int iterator = 0;
+            for (int n = 32; n < 302; n++)
+            {
+                if (n < 50)
+                    SetPixel(hdc, x, n + changings[l] * sin(i), RGB(0, 0, 0));
+                else if (n >= 50 && n < 176 && i < M_PI)
+                {
+                    if (x == 6 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 7 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 7 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 8 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 8 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 8 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 9 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 9 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 9 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 9 + 21 * allStars && n == 67 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 9 + 21 * allStars && n == 68 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 10 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 10 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 10 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 10 + 21 * allStars && n == 62 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 10 + 21 * allStars && n == 64 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 10 + 21 * allStars && n == 65 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 10 + 21 * allStars && n == 66 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 10 + 21 * allStars && n == 67 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 11 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 11 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 11 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 11 + 21 * allStars && n == 62 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 11 + 21 * allStars && n == 63 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 11 + 21 * allStars && n == 64 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 11 + 21 * allStars && n == 65 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 11 + 21 * allStars && n == 66 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 11 + 21 * allStars && n == 67 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 12 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 12 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 12 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 12 + 21 * allStars && n == 62 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 12 + 21 * allStars && n == 63 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 12 + 21 * allStars && n == 64 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 12 + 21 * allStars && n == 65 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 12 + 21 * allStars && n == 66 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 56 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 13 + 21 * allStars && n == 57 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 58 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 59 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 62 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 63 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 64 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 65 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 13 + 21 * allStars && n == 66 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 54 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 14 + 21 * allStars && n == 55 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 56 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 57 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 58 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 59 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 62 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 63 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 64 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 14 + 21 * allStars && n == 65 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 56 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 15 + 21 * allStars && n == 57 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 58 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 59 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 62 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 63 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 64 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 65 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 15 + 21 * allStars && n == 66 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 16 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 16 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 16 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 16 + 21 * allStars && n == 62 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 16 + 21 * allStars && n == 63 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 16 + 21 * allStars && n == 64 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 16 + 21 * allStars && n == 65 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 16 + 21 * allStars && n == 66 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 17 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 17 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 17 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 17 + 21 * allStars && n == 62 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 17 + 21 * allStars && n == 63 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 17 + 21 * allStars && n == 64 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 17 + 21 * allStars && n == 65 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 17 + 21 * allStars && n == 66 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 17 + 21 * allStars && n == 67 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 18 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 18 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 18 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 18 + 21 * allStars && n == 62 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 18 + 21 * allStars && n == 64 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 18 + 21 * allStars && n == 65 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 18 + 21 * allStars && n == 66 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 18 + 21 * allStars && n == 67 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 19 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 19 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 19 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 19 + 21 * allStars && n == 67 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 19 + 21 * allStars && n == 68 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 20 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 20 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 20 + 21 * allStars && n == 61 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 21 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                    }
+                    else if (x == 21 + 21 * allStars && n == 60 + 21 * (iterator - 1))
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                    }
+                    else if (x == 22 + 21 * allStars && n == 59 + 21 * iterator)
+                    {
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                        iterator++;
+                        if (allStars < 6)
+                            allStars += 1;
+                    }
+                    else
+                        SetPixel(hdc, x, n + changings[l] * sin(i), RGB(0, 0, 130));
+                }
+                else if (((68 <= n && n < 86) || (104 <= n && n < 122) || (140 <= n && n < 158)) && i >= M_PI || (176 <= n && n < 194) || (212 <= n && n < 230) || (248 <= n && n < 266))
+                {
+                    SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
+                }
+                else if (n >= 284)
+                {
+                    SetPixel(hdc, x, n + changings[l] * sin(i), RGB(0, 0, 0));
+                }
+                else
+                {
+                    SetPixel(hdc, x, n + changings[l] * sin(i), RGB(147, 0, 0));
+                }
+            }
+            x += 1;
+        }
+        x = 1;
+    }
+
+    ReleaseDC(hwnd, hdc);
+    cin.ignore();
 }
 
 //void N5()
@@ -198,3 +669,4 @@ void doAgain()
     cout << "Would you like to continue? (y/n) ";
     cin >> ans;
     ans == 'y' ? main() : 0;
+}
