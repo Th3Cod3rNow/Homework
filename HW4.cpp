@@ -143,7 +143,7 @@ void N4()
     for (int l = 0; l < 20; l++)
     {
         int allStars = 0;
-        for (double i = 0; i < M_PI * 2.5; i += 0.02)
+        for (double i = 0; i < M_PI * 2.5; i += 0.018)
         {
             int iterator = 0;
             for (int n = 32; n < 302; n++)
@@ -592,7 +592,7 @@ void N4()
                     {
                         SetPixel(hdc, x, n + changings[l] * sin(i), RGB(255, 255, 255));
                         iterator++;
-                        if (allStars < 6)
+                        if (allStars < 7)
                             allStars += 1;
                     }
                     else
