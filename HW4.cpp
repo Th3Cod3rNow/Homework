@@ -673,6 +673,39 @@ void N5()
     cin.ignore();
 }
 
+int romanNum(char letter)
+{
+    int flag = 0;
+    int arabic[7] = {1, 5, 10, 50, 100, 500, 1000};
+    char roman[7] = {'I', 'V', 'X', 'L', 'C', 'D', 'M'};
+
+    for (int k = 0; k < 7; k++)
+    {
+        if (letter == roman[k])
+        {
+            flag++;
+            return arabic[k];
+        }
+    }
+    if (flag == 0)
+        return 0;
+}
+
+void N6()
+{
+    string romDigits;
+    int summa = 0;
+
+    cout << "Enter your Roman numerals here: ";
+    cin >> romDigits;
+
+    for (char letter : romDigits)
+    {
+        
+    }
+    
+}
+
 void doAgain();
 
 int main()
@@ -687,22 +720,26 @@ int main()
         N1();
         doAgain();
         break;
-   case 2:
-       N2();
-       doAgain();
-       break;
-   case 3:
-       N3();
-       doAgain();
-       break;
-   case 4:
-       N4();
-       doAgain();
-       break;
-   case 5:
-       N5();
-       doAgain();
-       break;
+    case 2:
+        N2();
+        doAgain();
+        break;
+    case 3:
+        N3();
+        doAgain();
+        break;
+    case 4:
+        N4();
+        doAgain();
+        break;
+    case 5:
+        N5();
+        doAgain();
+        break;
+    case 6:
+        N6();
+        doAgain();
+        break;
     default:
         cout << "This number is unavailable!";
         break;
