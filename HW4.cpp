@@ -134,15 +134,13 @@ void N3()
 
 void N4()
 {
-    system("cls");
-    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     HWND hwnd = GetConsoleWindow();
     HDC hdc = GetDC(hwnd);
 
-    int changings[30] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    int changings[40] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     int x = 1;
 
-    for (int l = 0; l < 30; l++)
+    for (int l = 0; l < 40; l++)
     {
         int allStars = 0;
         for (double i = 0; i < M_PI * 2.5; i += 0.018)
@@ -622,10 +620,58 @@ void N4()
     cin.ignore();
 }
 
-//void N5()
-//{
-//
-//}
+void N5()
+{
+    HWND hwnd = GetConsoleWindow();
+    HDC hdc = GetDC(hwnd);
+
+    int x = 20;
+    int iterator = 2;
+
+    for (double i = 0; i < M_PI * 20; i += 0.06)
+    {
+        SetPixel(hdc, x, 130 - 50 * sin(i), RGB(255, 255, 255));
+        SetPixel(hdc, x, 130, RGB(0, 250, 120));
+        if (20 <= x && x < 26)
+        {
+            if (x == 20)
+            {
+                for (int n = 118; n < 127; n++)
+                {
+                    SetPixel(hdc, x - 10, n, RGB(0, 250, 120));
+                }
+                for (int n = 70; n < 180; n++)
+                {
+                    SetPixel(hdc, x, n, RGB(0, 250, 120));
+                }
+            }
+            else if (21 <= x && x < 25)
+            {
+                SetPixel(hdc, x - 10, 117, RGB(0, 250, 120));
+                SetPixel(hdc, x - 10, 127, RGB(0, 250, 120));
+            }
+            else if (x == 25)
+            {
+                for (int n = 118; n < 127; n++)
+                {
+                    SetPixel(hdc, x - 10, n, RGB(0, 250, 120));
+                }
+            }
+        }
+        else if (x == (int)(16.625 * iterator))
+        {
+            for (int n = 130; n < 138; n++)
+            {
+                SetPixel(hdc, x, n, RGB(0, 250, 120));
+            }
+            iterator++;
+        }
+        x++;
+    }
+
+    ReleaseDC(hwnd, hdc);
+    cin.ignore();
+}
 
 void doAgain();
 
@@ -653,10 +699,10 @@ int main()
        N4();
        doAgain();
        break;
-//   case 5:
-//       N5();
-//       doAgain();
-//       break;
+   case 5:
+       N5();
+       doAgain();
+       break;
     default:
         cout << "This number is unavailable!";
         break;
@@ -670,5 +716,9 @@ void doAgain()
     char ans;
     cout << "Would you like to continue? (y/n) ";
     cin >> ans;
-    ans == 'y' ? main() : 0;
+    if (ans == 'y')
+    {
+        system("cls");
+        main();
+    }
 }
