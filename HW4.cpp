@@ -134,13 +134,15 @@ void N3()
 
 void N4()
 {
+    system("cls");
+    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     HWND hwnd = GetConsoleWindow();
     HDC hdc = GetDC(hwnd);
 
-    int changings[20] = { 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4 };
+    int changings[30] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     int x = 1;
 
-    for (int l = 0; l < 20; l++)
+    for (int l = 0; l < 30; l++)
     {
         int allStars = 0;
         for (double i = 0; i < M_PI * 2.5; i += 0.018)
