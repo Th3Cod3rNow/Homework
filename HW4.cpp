@@ -81,15 +81,20 @@ void N1()
         cout << "Oops... Something was wrong!\n";
 }
 
-void signumFunc(double x)
+int signumFunc(double x)
 {
-    x > 0 ? cout << "+\n" : x < 0 ? cout << "-\n" : cout << "0\n";
+    if (x > 0)
+        return 1;
+    else if (x < 0)
+        return -1;
+    else
+        return 0;
 }
 
 void N2()
 {
     string usersDigit = numControl();
-    signumFunc(stod(usersDigit));
+    cout << signumFunc(stod(usersDigit)) << endl;
 }
 
 void triangle()
@@ -673,37 +678,140 @@ void N5()
     cin.ignore();
 }
 
-int romanNum(char letter)
-{
-    int flag = 0;
-    int arabic[7] = {1, 5, 10, 50, 100, 500, 1000};
-    char roman[7] = {'I', 'V', 'X', 'L', 'C', 'D', 'M'};
-
-    for (int k = 0; k < 7; k++)
-    {
-        if (letter == roman[k])
-        {
-            flag++;
-            return arabic[k];
-        }
-    }
-    if (flag == 0)
-        return 0;
-}
-
 void N6()
 {
     string romDigits;
-    int summa = 0;
+    int flag = 1;
+    int newFlag = 0;
 
     cout << "Enter your Roman numerals here: ";
     cin >> romDigits;
 
-    for (char letter : romDigits)
+    for (int z = 0; z < romDigits.size(); z++)
     {
-        
+        if (romDigits[z] == romDigits[z + 1] && romDigits[z] == romDigits[z + 2] && romDigits[z] == romDigits[z + 3] && romDigits[z] == 'X' && romDigits[z] == 'M' && romDigits[z] == 'C' && romDigits[z] == 'I')
+        {
+            cout << "ERROR!";
+            flag = 0;
+            break;
+        }
+        else if (romDigits[z] == romDigits[z + 1] && romDigits[z] == 'V' && romDigits[z] == 'L' && romDigits[z] == 'D')
+        {
+            cout << "ERROR!";
+            flag = 0;
+            break;
+        }
+        else if (romDigits[z] != 'V' && romDigits[z] != 'L' && romDigits[z] != 'D' && romDigits[z] != 'X' && romDigits[z] != 'M' && romDigits[z] != 'C' && romDigits[z] != 'I')
+        {
+            cout << "ERROR!";
+            flag = 0;
+            break;
+        }
     }
-    
+    if (flag == 1)
+    {
+        for (int i = 0; i < 4000; i++)
+        {
+            int l = i;
+            string roman = "";
+            for (int k = 0; k < (int)(l / 1000); k++)
+            {
+                roman += 'M';
+            }
+            l %= 1000;
+            if (l - (l % 100) == 900)
+            {
+                roman += "CM";
+                l -= 900;
+            }
+            for (int k = 0; k < (int)(l / 500); k++)
+            {
+                roman += 'D';
+            }
+            l %= 500;
+            if (l - (l % 100) == 400)
+            {
+                roman += "CD";
+                l -= 400;
+            }
+            for (int k = 0; k < (int)(l / 100); k++)
+            {
+                roman += 'C';
+            }
+            l %= 100;
+            if (l - (l % 10) == 90)
+            {
+                roman += "XC";
+                l -= 90;
+            }
+            for (int k = 0; k < (int)(l / 50); k++)
+            {
+                roman += 'L';
+            }
+            l %= 50;
+            if (l - (l % 10) == 40)
+            {
+                roman += "XL";
+                l -= 90;
+            }
+            for (int k = 0; k < (int)(l / 10); k++)
+            {
+                roman += 'X';
+            }
+            l %= 10;
+            if (l == 9)
+            {
+                roman += "IX";
+                l -= 9;
+            }
+            for (int k = 0; k < (int)(l / 5); k++)
+            {
+                roman += 'V';
+            }
+            l %= 5;
+            if (l == 4)
+            {
+                roman += "IV";
+                l -= 4;
+            }
+            for (int k = 0; k < (int)(l / 1); k++)
+            {
+                roman += 'I';
+            }
+            if (romDigits == roman)
+            {
+                cout << romDigits << " is " << i << endl;
+                newFlag = 1;
+                break;
+            }
+        }
+    }
+    if (newFlag == 0)
+    {
+        cout << "This digit is unbelievable!\n";
+    }
+}
+
+void N7()
+{
+    int m, b, c;
+    int s = 0;
+    cout << "Enter m, b and c: ";
+    cin >> m >> b >> c;
+
+    if (0 < m && m <= c && c > 0 && 0 < b && b <= c)
+    {
+        for (int i = 0; i <= b; i++)
+        {
+            s = (m * s + b) % c;
+            cout << s << " ";
+        }
+        cout << "\n";
+    }
+    else
+    {
+        cout << "You can't use these digits!\n";
+    }
 }
 
 void doAgain();
@@ -738,6 +846,10 @@ int main()
         break;
     case 6:
         N6();
+        doAgain();
+        break;
+    case 7:
+        N7();
         doAgain();
         break;
     default:
