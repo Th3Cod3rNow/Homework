@@ -813,6 +813,248 @@ void N7()
         cout << "You can't use these digits!\n";
     }
 }
+string forEight(int f)
+{
+    for (int i = 0; i < 4000; i++)
+    {
+        int l = i;
+        string roman = "";
+        for (int k = 0; k < (int)(l / 1000); k++)
+        {
+            roman += 'M';
+        }
+        l %= 1000;
+        if (l - (l % 100) == 900)
+        {
+            roman += "CM";
+            l -= 900;
+        }
+        for (int k = 0; k < (int)(l / 500); k++)
+        {
+            roman += 'D';
+        }
+        l %= 500;
+        if (l - (l % 100) == 400)
+        {
+            roman += "CD";
+            l -= 400;
+        }
+        for (int k = 0; k < (int)(l / 100); k++)
+        {
+            roman += 'C';
+        }
+        l %= 100;
+        if (l - (l % 10) == 90)
+        {
+            roman += "XC";
+            l -= 90;
+        }
+        for (int k = 0; k < (int)(l / 50); k++)
+        {
+            roman += 'L';
+        }
+        l %= 50;
+        if (l - (l % 10) == 40)
+        {
+            roman += "XL";
+            l -= 90;
+        }
+        for (int k = 0; k < (int)(l / 10); k++)
+        {
+            roman += 'X';
+        }
+        l %= 10;
+        if (l == 9)
+        {
+            roman += "IX";
+            l -= 9;
+        }
+        for (int k = 0; k < (int)(l / 5); k++)
+        {
+            roman += 'V';
+        }
+        l %= 5;
+        if (l == 4)
+        {
+            roman += "IV";
+            l -= 4;
+        }
+        for (int k = 0; k < (int)(l / 1); k++)
+        {
+            roman += 'I';
+        }
+        if (f == i)
+        {
+            return roman;
+        }
+    }
+}
+
+void N8()
+{
+    int sellers, products, greenSeller1, redSeller1, greenSeller2, redSeller2;
+    int moneyMax = 0;
+    int moneyMin = 2 * pow(10, 9);
+    int comMax = 0;
+    int comMin = 2 * pow(10, 9);
+    double moneySum = 0;
+    double comSum = 0;
+    cout << "Enter sellers count and products count here: ";
+    cin >> sellers >> products;
+
+    double** aTable = new double* [sellers];
+    for (int count = 0; count < sellers; count++)
+    {
+        aTable[count] = new double [products];
+        for (int i = 0; i < products; i++)
+        {
+            int item;
+            cout << "Enter the quantity of " << i + 1 << " item for " << count + 1 << " seller: ";
+            cin >> item;
+
+            aTable[count][i] = item;
+        }
+    }
+    double** bTable = new double* [products];
+    for (int count = 0; count < products; count++)
+    {
+        bTable[count] = new double[2];
+        double item1, item2;
+        cout << "Enter the cost of " << count + 1 << " item: ";
+        cin >> item1;
+        cout << "Enter the commission of " << count + 1 << " item: ";
+        cin >> item2;
+
+        bTable[count][0] = item1;
+        bTable[count][1] = item2;
+    }
+    double** cTable = new double* [sellers];
+    for (int count = 0; count < sellers; count++)
+    {
+        cTable[count] = new double[2];
+        cTable[count][0] = 0;
+        for (int j = 0; j < products; j++)
+        {
+            cTable[count][0] += aTable[count][j] * bTable[j][0];
+        }
+        moneySum += cTable[count][0];
+        if (cTable[count][0] < moneyMin)
+        {
+            moneyMin = cTable[count][0];
+            redSeller1 = count + 1;
+        }
+        if (cTable[count][0] > moneyMax)
+        {
+            moneyMax = cTable[count][0];
+            greenSeller1 = count + 1;
+        }
+        cTable[count][1] = 0;
+        for (int j = 0; j < products; j++)
+        {
+            cTable[count][1] += aTable[count][j] * bTable[j][1];
+        }
+        comSum += cTable[count][1];
+        if (cTable[count][1] < comMin)
+        {
+            comMin = cTable[count][1];
+            redSeller2 = count + 1;
+        }
+        if (cTable[count][1] > comMax)
+        {
+            comMax = cTable[count][1];
+            greenSeller2 = count + 1;
+        }
+    }
+
+
+    cout << "\n\x1B[92mЯ\033[0m - earned the most.\n\x1B[91mЯ\033[0m - earned least of all.\n\n";
+    cout << "\t";
+    for (int top = 0; top < products; top++)
+    {
+        cout << "\t" << forEight(top + 1);
+    }
+    cout << "\t\t\tCost\tComission\t\t\tProduct earnings\tComission earning\n" ;
+    for (int layer1 = 0; layer1 < sellers; layer1++)
+    {
+        if (layer1 + 1 == greenSeller1)
+            cout << "\x1B[92mSeller " << layer1 + 1 << "\033[0m ";
+        else if (layer1 + 1 == redSeller1)
+            cout << "\x1B[91mSeller " << layer1 + 1 << "\033[0m ";
+        else
+            cout << "Seller " << layer1 + 1 << " ";
+        for (int layer2 = 0; layer2 < products; layer2++)
+        {
+            cout << "\t" << aTable[layer1][layer2];
+        }
+        if (layer1 < products)
+            cout << "\t\t" << forEight(layer1 + 1) << "\t" << bTable[layer1][0] << "\t" << bTable[layer1][1];
+        else
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                cout << "\t";
+            }
+        }
+        cout << "\t\t\t\t" << cTable[layer1][0] << "\t\t\t" << cTable[layer1][1];
+        cout << "\n";
+    }
+    if (products > sellers)
+    {
+        for (int layer1 = sellers; layer1 < products; layer1++)
+        {
+            for (int y = 0; y <= products + 2; y++)
+            {
+                cout << "\t";
+            }
+            cout << forEight(layer1 + 1)  << "\t" << bTable[layer1][0] << "\t" << bTable[layer1][1] << endl;
+        }
+    }
+
+    cout << "\n\x1B[92mЯ\033[0m - got more commission.\n\x1B[91mЯ\033[0m - got less commission.\n\n";
+    cout << "\t";
+    for (int top = 0; top < products; top++)
+    {
+        cout << "\t" << forEight(top + 1);
+    }
+    cout << "\t\t\tCost\tComission\t\t\tProduct earnings\tComission earning\n";
+    for (int layer1 = 0; layer1 < sellers; layer1++)
+    {
+        if (layer1 + 1 == greenSeller2)
+            cout << "\x1B[92mSeller " << layer1 + 1 << "\033[0m ";
+        else if (layer1 + 1 == redSeller2)
+            cout << "\x1B[91mSeller " << layer1 + 1 << "\033[0m ";
+        else
+            cout << "Seller " << layer1 + 1 << " ";
+        for (int layer2 = 0; layer2 < products; layer2++)
+        {
+            cout << "\t" << aTable[layer1][layer2];
+        }
+        if (layer1 < products)
+            cout << "\t\t" << forEight(layer1 + 1) << "\t" << bTable[layer1][0] << "\t" << bTable[layer1][1];
+        else
+        {
+            for (int y = 0; y < 4; y++)
+            {
+                cout << "\t";
+            }
+        }
+        cout << "\t\t\t\t" << cTable[layer1][0] << "\t\t\t" << cTable[layer1][1];
+        cout << "\n";
+    }
+    if (products > sellers)
+    {
+        for (int layer1 = sellers; layer1 < products; layer1++)
+        {
+            for (int y = 0; y <= products + 2; y++)
+            {
+                cout << "\t";
+            }
+            cout << forEight(layer1 + 1) << "\t" << bTable[layer1][0] << "\t" << bTable[layer1][1] << endl;
+        }
+    }
+
+    cout << "\n\x1B[93mALL SALES MONEY: " << moneySum << "\nALL COMISSIONS MONEY: " << comSum << "\nALL MONEY: " << comSum + moneySum << "\033[0m\n";
+}
 
 void doAgain();
 
@@ -850,6 +1092,10 @@ int main()
         break;
     case 7:
         N7();
+        doAgain();
+        break;
+    case 8:
+        N8();
         doAgain();
         break;
     default:
