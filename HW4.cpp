@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <windows.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -1056,6 +1057,55 @@ void N8()
     cout << "\n\x1B[93mALL SALES MONEY: " << moneySum << "\nALL COMISSIONS MONEY: " << comSum << "\nALL MONEY: " << comSum + moneySum << "\033[0m\n";
 }
 
+void N9()
+{
+    string usersDigit;
+    int scale, secondScale;
+    int tenScale = 0;
+    int flag = 0;
+    string alp = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    cout << "Enter your digit, first scale of notation and second scale of notation here (Example: 13DAF4 16 27): ";
+    cin >> usersDigit >> scale >> secondScale;
+
+    if (scale > 1 && scale <= 36 && secondScale > 1 && secondScale <= 36 && usersDigit <= "2147483647" && usersDigit > "0")
+    {
+        int g = usersDigit.size() - 1;
+        for (char c : usersDigit)
+        {
+            if (c > alp[scale])
+            {
+                cout << "Wrong digit!\n";
+                flag = 1;
+                break;
+            }
+            for (int count = 0; count < alp.size(); count++)
+            {
+                if (c == alp[count])
+                {
+                    tenScale += count * pow(scale, g);
+                    g--;
+                    break;
+                }
+            }
+        }
+
+        if (flag == 0)
+        {
+            string newDigit = "";
+            while ((int)(tenScale / secondScale) > 0)
+            {
+                newDigit += alp[tenScale % secondScale];
+                tenScale /= secondScale;
+            }
+            newDigit += alp[tenScale % secondScale];
+            reverse(newDigit.begin(), newDigit.end());
+            cout << "\n" << usersDigit << " is \x1B[92m" << newDigit << "\033[0m\n";
+        }
+    }
+    else
+        cout << "ERROR!\n";
+}
+
 void doAgain();
 
 int main()
@@ -1096,6 +1146,10 @@ int main()
         break;
     case 8:
         N8();
+        doAgain();
+        break;
+    case 9:
+        N9();
         doAgain();
         break;
     default:
