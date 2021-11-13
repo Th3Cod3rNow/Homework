@@ -94,6 +94,7 @@ int signumFunc(double x)
 
 void N2()
 {
+    cout << "Enter here your digit: ";
     string usersDigit = numControl();
     cout << signumFunc(stod(usersDigit)) << endl;
 }
@@ -692,19 +693,16 @@ void N6()
     {
         if (romDigits[z] == romDigits[z + 1] && romDigits[z] == romDigits[z + 2] && romDigits[z] == romDigits[z + 3] && romDigits[z] == 'X' && romDigits[z] == 'M' && romDigits[z] == 'C' && romDigits[z] == 'I')
         {
-            cout << "ERROR!";
             flag = 0;
             break;
         }
         else if (romDigits[z] == romDigits[z + 1] && romDigits[z] == 'V' && romDigits[z] == 'L' && romDigits[z] == 'D')
         {
-            cout << "ERROR!";
             flag = 0;
             break;
         }
         else if (romDigits[z] != 'V' && romDigits[z] != 'L' && romDigits[z] != 'D' && romDigits[z] != 'X' && romDigits[z] != 'M' && romDigits[z] != 'C' && romDigits[z] != 'I')
         {
-            cout << "ERROR!";
             flag = 0;
             break;
         }
@@ -793,12 +791,35 @@ void N6()
     }
 }
 
+int numbers()
+{
+    string word;
+    cin >> word;
+    int flag = 1;
+    for (char i : word)
+    {
+        isdigit(i) ? NULL : flag = 0;
+    }
+    if (flag == 1 && stoi(word) <= 2147483647)
+        return stoi(word);
+    else
+    {
+        cout << "Your digit is wrong! It should be INT.\nTry again: ";
+        numbers();
+    }
+}
+
 void N7()
 {
     int m, b, c;
     int s = 0;
-    cout << "Enter m, b and c: ";
-    cin >> m >> b >> c;
+    int flag = 1;
+    cout << "Enter m: ";
+    m = numbers();
+    cout << "Enter b: ";
+    b = numbers();
+    cout << "Enter c: ";
+    c = numbers();
 
     if (0 < m && m <= c && c > 0 && 0 < b && b <= c)
     {
@@ -814,6 +835,7 @@ void N7()
         cout << "You can't use these digits!\n";
     }
 }
+
 string forEight(int f)
 {
     for (int i = 0; i < 4000; i++)
@@ -1061,13 +1083,13 @@ void N9()
 {
     string usersDigit;
     int scale, secondScale;
-    int tenScale = 0;
+    int64_t tenScale = 0;
     int flag = 0;
     string alp = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     cout << "Enter your digit, first scale of notation and second scale of notation here (Example: 13DAF4 16 27): ";
     cin >> usersDigit >> scale >> secondScale;
 
-    if (scale > 1 && scale <= 36 && secondScale > 1 && secondScale <= 36 && usersDigit <= "2147483647" && usersDigit > "0")
+    if (scale > 1 && scale <= 36 && secondScale > 1 && secondScale <= 36)
     {
         int g = usersDigit.size() - 1;
         for (char c : usersDigit)
@@ -1089,6 +1111,8 @@ void N9()
             }
         }
 
+        cout << tenScale << endl;
+
         if (flag == 0)
         {
             string newDigit = "";
@@ -1097,7 +1121,8 @@ void N9()
                 newDigit += alp[tenScale % secondScale];
                 tenScale /= secondScale;
             }
-            newDigit += alp[tenScale % secondScale];
+            if (scale != 10)
+                newDigit += alp[tenScale % secondScale];
             reverse(newDigit.begin(), newDigit.end());
             cout << "\n" << usersDigit << " is \x1B[92m" << newDigit << "\033[0m\n";
         }
