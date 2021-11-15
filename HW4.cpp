@@ -751,7 +751,7 @@ void N6()
             if (l - (l % 10) == 40)
             {
                 roman += "XL";
-                l -= 90;
+                l -= 40;
             }
             for (int k = 0; k < (int)(l / 10); k++)
             {
