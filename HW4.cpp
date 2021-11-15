@@ -835,6 +835,41 @@ void N7()
         cout << "You can't use these digits!\n";
     }
 }
+unsigned int PRNG1()
+{
+    static unsigned int seed = 4541;
+
+    seed = (8253729 * seed + 2396403);
+
+    return seed % 10;
+}
+
+unsigned int PRNG2()
+{
+    static unsigned int seed = 4541;
+
+    seed = (8253729 * seed + 2396403);
+
+    return seed % 93;
+}
+
+double PRNG3()
+{
+    static unsigned int seed = 4541;
+    double r = ((double)rand() / (RAND_MAX)) + 1;
+    seed = (8253729 * seed + 2396403);
+
+    return seed % 30 + r;
+}
+
+double PRNG4()
+{
+    static unsigned int seed = 4541;
+    double r = ((double)rand() / (RAND_MAX)) + 1;
+    seed = (8253729 * seed + 2396403);
+
+    return seed % 2 + r;
+}
 
 string forEight(int f)
 {
@@ -922,8 +957,21 @@ void N8()
     int comMin = 2 * pow(10, 9);
     double moneySum = 0;
     double comSum = 0;
-    cout << "Enter sellers count and products count here: ";
-    cin >> sellers >> products;
+    char ans;
+
+    cout << "Do you want everything to be filled in automatically? (y/n) ";
+    cin >> ans;
+
+    if (ans != 'y')
+    {
+        cout << "Enter sellers count and products count here: ";
+        cin >> sellers >> products;
+    }
+    else
+    {
+        sellers = PRNG1();
+        products = PRNG1();
+    }
 
     double** aTable = new double* [sellers];
     for (int count = 0; count < sellers; count++)
@@ -932,8 +980,15 @@ void N8()
         for (int i = 0; i < products; i++)
         {
             int item;
-            cout << "Enter the quantity of " << i + 1 << " item for " << count + 1 << " seller: ";
-            cin >> item;
+            if (ans != 'y')
+            {
+                cout << "Enter the quantity of " << i + 1 << " item for " << count + 1 << " seller: ";
+                cin >> item;
+            }
+            else
+            {
+                item = PRNG2();
+            }
 
             aTable[count][i] = item;
         }
@@ -943,10 +998,24 @@ void N8()
     {
         bTable[count] = new double[2];
         double item1, item2;
-        cout << "Enter the cost of " << count + 1 << " item: ";
-        cin >> item1;
-        cout << "Enter the commission of " << count + 1 << " item: ";
-        cin >> item2;
+        if (ans != 'y')
+        {
+            cout << "Enter the cost of " << count + 1 << " item: ";
+            cin >> item1;
+        }
+        else
+        {
+            item1 = PRNG3();
+        }
+        if (ans != 'y')
+        {
+            cout << "Enter the commission of " << count + 1 << " item: ";
+            cin >> item2;
+        }
+        else
+        {
+            item2 = PRNG4();
+        }
 
         bTable[count][0] = item1;
         bTable[count][1] = item2;
@@ -1010,7 +1079,7 @@ void N8()
             cout << "\t" << aTable[layer1][layer2];
         }
         if (layer1 < products)
-            cout << "\t\t" << forEight(layer1 + 1) << "\t" << bTable[layer1][0] << "\t" << bTable[layer1][1];
+            cout << setprecision(4) << "\t\t" << forEight(layer1 + 1) << "\t" << bTable[layer1][0] << "\t" << bTable[layer1][1];
         else
         {
             for (int y = 0; y < 4; y++)
@@ -1076,9 +1145,8 @@ void N8()
         }
     }
 
-    cout << "\n\x1B[93mALL SALES MONEY: " << moneySum << "\nALL COMISSIONS MONEY: " << comSum << "\nALL MONEY: " << comSum + moneySum << "\033[0m\n";
+    cout << setprecision(8) << "\n\x1B[93mALL SALES MONEY: " << moneySum << "\nALL COMISSIONS MONEY: " << comSum << "\nALL MONEY: " << comSum + moneySum << "\033[0m\n";
 }
-
 void N9()
 {
     string usersDigit;
