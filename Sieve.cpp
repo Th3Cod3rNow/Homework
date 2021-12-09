@@ -5,21 +5,32 @@ using namespace std;
 
 int main()
 {
-    int usersDigit;
-    cout << "Enter your digit here: ";
-    cin >> usersDigit;
+    int numbers;
+    cout << "Enter last simple digit here : ";
+    cin >> numbers;
 
-    if (usersDigit)
+    int* allDigits = new int[numbers - 2];
+    int* simpleDigits = new int[numbers - 2];
+    
+    for (int i = 2; i <= numbers; i++)
     {
-        for (int i = 2; i <= usersDigit; i++)
-        {
-            if (i == 2 || i == 3 || i == 5 || i == 7)
-                cout << i << " ";
-            else if (i % 2 != 0 && i % 3 != 0 && i % 5 != 0 && i % 7 != 0)
-                cout << i << " ";
-        }
-        cout << "\n";
+        allDigits[i - 2] = i;
+        simpleDigits[i - 2] = i;
     }
-    else
-        cout << "\x1B[91mERROR\033[0m\n";
+    for (int i = 2; pow(i, 2) < numbers; i++)
+    {
+        if (simpleDigits[i-2])
+            for (int j = i * 2; j < numbers; j += i)
+                simpleDigits[j-2] = 0;
+    }
+    int iterator = 1;
+    for (int k = 0; k <= numbers - 2; k++)
+    {
+        iterator == 1 ? cout << "\t" : cout << "";
+        allDigits[k] == simpleDigits[k] ? cout << "\x1B[92m" << allDigits[k] << "\t\033[0m" : cout << "\x1B[91m" << allDigits[k] << "\t\033[0m";
+        iterator++;
+        iterator % 10 == 0 ? cout << "\n" : cout << "";
+    }
+
+    return 0;
 }
