@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include <string>
 #include <fstream>
 
@@ -8,7 +9,7 @@ int main()
 {
     int ans;
 
-    cout << "Read (1), Write(2) : ";
+    cout << "Read (1), Find most popular(2) : ";
     cin >> ans;
 
     string theWay, fileText, userText, fullText;
@@ -30,22 +31,63 @@ int main()
     }
     else if (ans == 2)
     {
-        cout << "Enter your text here: \n";
-        while (true)
+        string alp = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.?!\"':;-+=_&%$#@~<>()*/|\\№`[]{}";
+        int* counter = new int[alp.size()];
+
+        for (int t = 0; t < alp.size(); t++)
         {
-            cin.ignore();
-            getline(std::cin, userText);
-            if (userText.empty())
-                break;
-            fullText += userText + "\n";
+            counter[t] = 0;
         }
-        ofstream userF(theWay, ios::app);
+
+        ifstream userF("c:/users/serpuhov/desktop/123.txt");
+
         if (userF.is_open())
         {
-            userF << fullText;
+            string fromFile;
+            while (getline(userF, fromFile))
+            {
+                for (char i : fromFile)
+                {
+                    counter[alp.find(i)] += 1;
+                }
+            }
         }
         else
-            cout << "Error\n";
+            cout << "Smth was wrong!";
+
+        userF.close();
+
+        int maximum = 0;
+        int element;
+        for (int t = 0; t < alp.size(); t++)
+        {
+            if (counter[t] > maximum)
+            {
+                maximum = counter[t];
+                element = t;
+            }
+        }
+
+        ifstream newUserF("c:/users/serpuhov/desktop/123.txt");
+
+        if (newUserF.is_open())
+        {
+            string fromFile;
+            while (getline(newUserF, fromFile))
+            {
+                for (char i : fromFile)
+                {
+                    i == alp[element] ? cout << "\x1B[92m" << i << "\033[0m" : cout << i;
+                }
+                cout << "\n";
+            }
+        }
+        else
+            cout << "Smth was wrong!";
+
+        newUserF.close();
+
+        cout << "\n" << alp[element] << " = " << maximum;
     }
     else
         cout << "You can't use this digit!\n";
