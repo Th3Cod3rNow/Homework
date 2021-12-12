@@ -22,7 +22,7 @@ int main()
         for (int i = 2; pow(i, 2) < numbers; i++)
         {
             if (simpleDigits[i - 2])
-                for (int j = i * 2; j < numbers; j += i)
+                for (int j = i * 2; j <= numbers; j += i)
                     simpleDigits[j - 2] = 0;
         }
         int iterator = 1;
